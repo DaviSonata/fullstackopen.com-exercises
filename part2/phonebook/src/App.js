@@ -143,6 +143,14 @@ const App = () => {
 						setFlag(null)
 					}, 5000)
 				})
+				.catch(error => {
+					setMessage(error.response.data.error)
+					setFlag('bad')
+					setTimeout(() => {
+						setMessage(null)
+						setFlag(null)
+					}, 5000)
+				})
 		}else{
 			if(window.confirm(newName + " is already added to phonebook, replace the old number with a new one?")){
 				const changedPerson = { ...personsEqual[0], number: newNumber }
