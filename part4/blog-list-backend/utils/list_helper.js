@@ -1,28 +1,28 @@
 function groupBy(list, keyGetter) {
-    const map = new Map();
-    list.forEach((item) => {
-        const key = item[keyGetter];
-        const collection = map.get(key);
-        if (!collection) {
-            map.set(key, [item]);
-        } else {
-            collection.push(item);
-        }
-    });
-    return map;
+	const map = new Map()
+	list.forEach((item) => {
+		const key = item[keyGetter]
+		const collection = map.get(key)
+		if (!collection) {
+			map.set(key, [item])
+		} else {
+			collection.push(item)
+		}
+	})
+	return map
 }
 
 function removeDuplicates(objArray){
-	var dataArr = objArray.map(item=>{
+	var dataArr = objArray.map(item => {
 		return [item.name,item]
-	}); // creates array of array
-	var maparr = new Map(dataArr); // create key value pair from array of array
-	var result = [...maparr.values()];//converting back to array from mapobject
+	}) // creates array of array
+	var maparr = new Map(dataArr) // create key value pair from array of array
+	var result = [...maparr.values()]//converting back to array from mapobject
 	return result
 }
 
 const dummy = (blogs) => {
-  // ...
+	// ...
 	return 1
 }
 
@@ -62,12 +62,12 @@ const favoriteBlog = (blogs) => {
 
 const favoriteAuthor = (blogs) => {
 	const authors = blogs.map(blog => blog.author)
-	const blogs_grouped_by_author = groupBy(blogs, "author")
+	const blogs_grouped_by_author = groupBy(blogs, 'author')
 	
 	const author_blogs = authors.map(author => a = {
-			author: author,
-			blogs: blogs_grouped_by_author.get(author).length
-		}
+		author: author,
+		blogs: blogs_grouped_by_author.get(author).length
+	}
 	)
 	
 	const author_blogs_unique = removeDuplicates(author_blogs)
@@ -90,19 +90,19 @@ const favoriteAuthor = (blogs) => {
 const mostLikes = (blogs) => {
 	const authors = blogs.map(blog => blog.author)
 	const author_likes = blogs.map(blog => a = {
-			author: blog.author,
-			likes: blog.likes
-		}
+		author: blog.author,
+		likes: blog.likes
+	}
 	)
 	
 	const author_likes_map = new Map()
 	
 	for (i=0;i<author_likes.length;i++){
-		const key = author_likes[i].author;
-		const likes = author_likes[i].likes;
-		const collection = author_likes_map.get(key);
+		const key = author_likes[i].author
+		const likes = author_likes[i].likes
+		const collection = author_likes_map.get(key)
 		if(!collection){
-			author_likes_map.set(key, likes);
+			author_likes_map.set(key, likes)
 		}else{
 			author_likes_map.set(key, author_likes_map.get(key) + likes)
 		}
@@ -138,5 +138,5 @@ const mostLikes = (blogs) => {
 }
 
 module.exports = {
-  dummy, totalLikes, favoriteBlog, favoriteAuthor, mostLikes
+	dummy, totalLikes, favoriteBlog, favoriteAuthor, mostLikes
 }

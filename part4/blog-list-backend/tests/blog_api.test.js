@@ -13,20 +13,20 @@ beforeEach(async () => {
 	await User.insertMany(helper.initialUsers)
 })
 
-let token = "";
+let token = ''
 beforeAll(async () => {
 	const tester_login = await {
-		username: "testador",
-		password: "12345678"
+		username: 'testador',
+		password: '12345678'
 	}
 	console.log(tester_login)
 
 	const response = await api
-		.post("/api/login")
+		.post('/api/login')
 		.send(tester_login)
-	token = "bearer " + response.body.token
+	token = 'bearer ' + response.body.token
 	console.log(token)
-});
+})
 
 test('blogs are returned as JSON', async () =>
 	await api

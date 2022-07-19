@@ -17,7 +17,7 @@ const getTokenFrom = request => {
 	return null
 }
 
-const getUserFromToken = request => {
+const getUserFromToken = (request, response) => {
 	const token = getTokenFrom(request)
 	const decodedToken = jwt.verify(token, process.env.SECRET)
 	if (!decodedToken.id) {
@@ -53,7 +53,7 @@ blogsRouter.post('/', async (request, response) => {
 	}
 })
 
-blogsRouter.delete('/:id', async (request, response, next) => {
+blogsRouter.delete('/:id', async (request, response) => {
 
 	const userlogged = await User.findById(getUserFromToken(request))
 	
@@ -78,9 +78,9 @@ blogsRouter.put('/', async (request, response, next) => {
 		likes: body.likes,
 	}
 	
-	await Blog.findOneAndUpdate({title: body.title}, blog)
+	await Blog.findOneAndUpdate({ title: body.title }, blog)
 		.then(updatedBlog => {
-		    response.json(updatedBlog)
+			response.json(updatedBlog)
 		})
 		.catch(error => next(error))
 })
